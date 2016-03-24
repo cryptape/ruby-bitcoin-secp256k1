@@ -17,7 +17,7 @@ git submodule update --init --recursive
 gem i bitcoin-secp256k1
 ```
 
-Then require 'secp256k1' (without `bitcoin-` prefix) in your source code.
+Then `require 'secp256k1'` (without `bitcoin-` prefix) in your source code.
 
 ## Usage
 
