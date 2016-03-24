@@ -16,6 +16,8 @@ Gem::Specification.new do |s|
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.extensions = ['ext/secp256k1/extconf.rb']
 
+  s.add_dependency('ffi', '>= 1.9.10')
+
   s.add_development_dependency('rake', '~> 10.5')
   s.add_development_dependency('rake-compiler', '~> 0.9')
   s.add_development_dependency('minitest', '5.8.3')
