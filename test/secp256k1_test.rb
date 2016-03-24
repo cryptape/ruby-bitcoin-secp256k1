@@ -10,7 +10,7 @@ require 'json'
 class Secp256k1Test < Minitest::Test
   include Secp256k1
 
-  def test_ecdsa_recoverable_serialize
+  def test_ecdsa_sign
     vec = ecdsa_sig['vectors']
     pk = PrivateKey.new
 
@@ -25,7 +25,7 @@ class Secp256k1Test < Minitest::Test
       sig_check = pk.ecdsa_serialize sig_raw
 
       assert_equal sig, sig_check
-      #assert_equal sig_check, pk.ecdsa_serialize(pk.ecdsa_deserialize(sig_check))
+      assert_equal sig_check, pk.ecdsa_serialize(pk.ecdsa_deserialize(sig_check))
     end
   end
 

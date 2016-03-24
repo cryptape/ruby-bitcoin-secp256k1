@@ -13,5 +13,14 @@ module Secp256k1
       output.read_bytes(outputlen.read_uint)
     end
 
+    def ecdsa_deserialize(ser_sig)
+      raw_sig = C::ECDSASignature.new.pointer
+
+      res = C.secp256k1_ecdsa_signature_parse_der(@ctx, raw_sig, ser_sig, ser_sig.size)
+      raise AssertError, "raw signature parse failed" unless res == 1
+
+      raw_sig
+    end
+
   end
 end
