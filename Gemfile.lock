@@ -1,0 +1,26 @@
+PATH
+  remote: .
+  specs:
+    bitcoin-secp256k1 (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.8.3)
+    rake (10.5.0)
+    rake-compiler (0.9.7)
+      rake
+    yard (0.8.7.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bitcoin-secp256k1!
+  minitest (= 5.8.3)
+  rake (~> 10.5)
+  rake-compiler (~> 0.9)
+  yard (= 0.8.7.6)
+
+BUNDLED WITH
+   1.11.2
