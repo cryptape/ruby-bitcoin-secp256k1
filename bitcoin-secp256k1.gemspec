@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
 
   s.files      = `git ls-files`.split("\n")
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.extensions = ['ext/secp256k1/extconf.rb']
 
   s.add_dependency('ffi', '>= 1.9.10')
 
