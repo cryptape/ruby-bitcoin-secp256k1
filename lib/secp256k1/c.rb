@@ -1,3 +1,4 @@
+# -*- encoding : ascii-8bit -*-
 require 'ffi'
 require 'ffi/tools/const_generator'
 

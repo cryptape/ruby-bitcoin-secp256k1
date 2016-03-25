@@ -1,3 +1,4 @@
+# -*- encoding : ascii-8bit -*-
 require 'secp256k1/version'
 require 'secp256k1/c'
 require 'secp256k1/utils'
