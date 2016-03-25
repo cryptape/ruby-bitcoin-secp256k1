@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bitcoin-secp256k1 (0.1.1)
+    bitcoin-secp256k1 (0.2.0)
       ffi (>= 1.9.10)
 
 GEM
