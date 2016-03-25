@@ -26,7 +26,7 @@ module Secp256k1
   class PublicKey < BaseKey
     include ECDSA, Utils
 
-    attr :public_key
+    attr_accessor :public_key
 
     def initialize(pubkey: nil, raw: false, flags: FLAG_VERIFY, ctx: nil)
       super(ctx, flags)
