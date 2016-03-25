@@ -175,7 +175,7 @@ module Secp256k1
 
     def ecdsa_sign_recoverable(msg, raw: false, digest: Digest::SHA256)
       msg32 = hash32 msg, raw, digest
-      raw_sig = FFI::MemoryPointer.new :byte, C::ECDSARecoverableSignature, false
+      raw_sig = C::ECDSARecoverableSignature.new.pointer
 
       res = C.secp256k1_ecdsa_sign_recoverable @ctx, raw_sig, msg32, @private_key, nil, nil
       raise AssertError, "failed to sign" unless res == 1

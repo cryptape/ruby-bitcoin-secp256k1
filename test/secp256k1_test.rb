@@ -7,6 +7,14 @@ require 'secp256k1'
 
 require 'json'
 
+class MyECDSA < Secp256k1::BaseKey
+  include Secp256k1::Utils, Secp256k1::ECDSA
+
+  def initialize
+    super(nil, Secp256k1::ALL_FLAGS)
+  end
+end
+
 class Secp256k1Test < Minitest::Test
   include Secp256k1
 
@@ -40,6 +48,50 @@ class Secp256k1Test < Minitest::Test
     sig_raw = pk.ecdsa_deserialize_compact compact
     assert_equal compact, pk.ecdsa_serialize_compact(sig_raw)
     assert_equal true, pk.pubkey.ecdsa_verify('test', sig_raw)
+  end
+
+  def test_ecdsa_normalize
+    pk = PrivateKey.new
+    raw_sig = pk.ecdsa_sign 'hi'
+
+    had_to_normalize, normsig = pk.ecdsa_signature_normalize raw_sig
+    assert_equal false, had_to_normalize
+    assert_equal pk.ecdsa_serialize(raw_sig), pk.ecdsa_serialize(normsig)
+    assert_equal pk.ecdsa_serialize_compact(raw_sig), pk.ecdsa_serialize_compact(normsig)
+
+    had_to_normalize, normsig = pk.ecdsa_signature_normalize(raw_sig, check_only: true)
+    assert_equal false, had_to_normalize
+    assert_equal nil, normsig
+
+    sig = "\xAA" + "\xFF"*31 + "\xAA" + "\xFF"*31
+    raw_sig = pk.ecdsa_deserialize_compact sig
+
+    normalized, normsig = pk.ecdsa_signature_normalize raw_sig
+    assert_equal true, normalized
+    assert pk.ecdsa_serialize(raw_sig) != pk.ecdsa_serialize(normsig)
+
+    normalized, normsig = pk.ecdsa_signature_normalize raw_sig, check_only: true
+    assert_equal true, normalized
+    assert_equal nil, normsig
+  end
+
+  def test_ecdsa_recover
+    pk = PrivateKey.new
+    unrelated = MyECDSA.new
+
+    recsig = pk.ecdsa_sign_recoverable 'hello'
+    pubkey = unrelated.ecdsa_recover 'hello', recsig
+    pubser = PublicKey.new(pubkey: pubkey).serialize
+    assert_equal pubser, pk.pubkey.serialize
+
+    recsig_ser = unrelated.ecdsa_recoverable_serialize recsig
+    recsig2 = unrelated.ecdsa_recoverable_deserialize *recsig_ser
+    pubkey2 = unrelated.ecdsa_recover 'hello', recsig2
+    pubser2 = PublicKey.new(pubkey: pubkey2).serialize
+    assert_equal pubser, pubser2
+
+    raw_sig = unrelated.ecdsa_recoverable_convert recsig2
+    unrelated.ecdsa_deserialize(unrelated.ecdsa_serialize(raw_sig))
   end
 
   private
