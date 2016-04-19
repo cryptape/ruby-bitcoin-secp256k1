@@ -34,6 +34,9 @@ module Secp256k1
     # secp256k1_context* secp256k1_context_create(unsigned int flags)
     attach_function :secp256k1_context_create, [:uint], :pointer
 
+    # int secp256k1_ec_pubkey_parse(const secp256k1_context* ctx, secp256k1_pubkey* pubkey, const unsigned char *input, size_t inputlen)
+    attach_function :secp256k1_ec_pubkey_parse, [:pointer, :pointer, :pointer, :size_t], :int
+
     # int secp256k1_ec_pubkey_create(const secp256k1_context* ctx, secp256k1_pubkey *pubkey, const unsigned char *seckey)
     attach_function :secp256k1_ec_pubkey_create, [:pointer, :pointer, :pointer], :int
 
