@@ -34,6 +34,9 @@ module Secp256k1
     # secp256k1_context* secp256k1_context_create(unsigned int flags)
     attach_function :secp256k1_context_create, [:uint], :pointer
 
+    # void secp256k1_context_destroy(secp256k1_context* ctx)
+    attach_function :secp256k1_context_destroy, [:pointer], :void
+
     # int secp256k1_ec_pubkey_parse(const secp256k1_context* ctx, secp256k1_pubkey* pubkey, const unsigned char *input, size_t inputlen)
     attach_function :secp256k1_ec_pubkey_parse, [:pointer, :pointer, :pointer, :size_t], :int
 
@@ -81,5 +84,6 @@ module Secp256k1
 
     # int secp256k1_ecdsa_recoverable_signature_convert(const secp256k1_context *ctx, secp256k1_ecdsa_signature *sig, const secp256k1_ecdsa_recoverable_signature *sigin)
     attach_function :secp256k1_ecdsa_recoverable_signature_convert, [:pointer, :pointer, :pointer], :int
+
   end
 end
