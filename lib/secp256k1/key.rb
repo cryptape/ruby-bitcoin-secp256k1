@@ -1,6 +1,7 @@
 # -*- encoding : ascii-8bit -*-
 require 'digest'
 require 'securerandom'
+require 'weakref'
 
 module Secp256k1
 
@@ -17,7 +18,7 @@ module Secp256k1
       @flags = flags
       @ctx = ctx
 
-      ObjectSpace.define_finalizer(self) do |id|
+      ObjectSpace.define_finalizer(WeakRef.new(self)) do |id|
         C.secp256k1_context_destroy @ctx if @destroy
       end
     end
