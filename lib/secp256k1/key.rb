@@ -1,7 +1,6 @@
 # -*- encoding : ascii-8bit -*-
 require 'digest'
 require 'securerandom'
-require 'weakref'
 
 module Secp256k1
 
@@ -11,16 +10,12 @@ module Secp256k1
 
       unless ctx
         raise ArgumentError, "invalid flags" unless [NO_FLAGS, FLAG_SIGN, FLAG_VERIFY, ALL_FLAGS].include?(flags)
-        ctx = C.secp256k1_context_create flags
+        ctx = FFI::AutoPointer.new C.secp256k1_context_create(flags), C.method(:secp256k1_context_destroy)
         @destroy = true
       end
 
       @flags = flags
       @ctx = ctx
-
-      ObjectSpace.define_finalizer(WeakRef.new(self)) do |id|
-        C.secp256k1_context_destroy @ctx if @destroy
-      end
     end
   end
 
