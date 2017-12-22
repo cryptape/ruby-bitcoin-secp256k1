@@ -85,7 +85,7 @@ module Secp256k1
     # int secp256k1_ecdsa_recoverable_signature_convert(const secp256k1_context *ctx, secp256k1_ecdsa_signature *sig, const secp256k1_ecdsa_recoverable_signature *sigin)
     attach_function :secp256k1_ecdsa_recoverable_signature_convert, [:pointer, :pointer, :pointer], :int
 
-    # int secp256k1_ecdh(const secp256k1_context* ctx, unsigned char *result, const secp256k1_pubkey *point, const unsigned char *scalar) {
+    # int secp256k1_ecdh(const secp256k1_context* ctx, unsigned char *result, const secp256k1_pubkey *point, const unsigned char *scalar)
     attach_function :secp256k1_ecdh, [:pointer, :pointer, :pointer, :pointer], :int
   end
 end
