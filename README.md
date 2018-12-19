@@ -1,6 +1,6 @@
 # ruby-bitcoin-secp256k1
 
-## Prerequiste
+## Prerequisite
 
 In order to use this gem, [libsecp256k1](https://github.com/bitcoin/secp256k1) with recovery module enabled must be in place.
 
