@@ -1,0 +1,57 @@
+################
+# CI Workflow:
+# feature development, trigger by `git push`:
+#   test -> code_audit(code_security_audit and code_quality_audit)
+#
+# feature deploy, trigger by `git push --tags`
+#   test -> deploy
+#
+# Stages:
+# - test: run `rake test`
+# - code_audit: run `code_quality security_audit` and `code_quality quality_audit`
+# - deploy: auto build and upload a gem package to rubygems.org after `git push --tags`
+#
+# Principle:
+# - fail fast
+# - done is better than perfect
+################
+
+stages:
+  - test
+  - code_audit
+  - deploy
+
+sudo: false
+language: ruby
+rvm:
+  - 2.4.4
+  - 2.5.3
+before_install:
+  - gem install bundler
+  - git submodule update --init --recursive
+  - ./install_lib.sh
+
+# config GitHub OAuth Token
+env:
+  global:
+    secure: ENV_GLOBAL_SECURE
+
+jobs:
+  include:
+    - stage: code_audit
+      if: branch != master
+      install: gem install code_quality --no-ri --no-rdoc
+      script:
+        - bundle install # to generate Gemfile.lock
+        - code_quality security_audit:bundler_audit
+        - code_quality quality_audit fail_fast=false generate_index=true lowest_score=80 rubocop_max_offenses=200
+
+deploy:
+  # automatically release Ruby gem to RubyGems after a successful build with `git push --tags`
+  - provider: rubygems
+    api_key:
+      secure: API_KEY_SECURE
+    gem: bitcoin-secp256k1
+    on:
+      tags: true
+      repo: cryptape/ruby-bitcoin-secp256k1
