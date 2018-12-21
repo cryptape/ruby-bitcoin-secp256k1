@@ -2,22 +2,24 @@
 
 ## Prerequisite
 
-In order to use this gem, [libsecp256k1](https://github.com/bitcoin/secp256k1) with recovery module enabled must be in place.
+In order to use this gem, [libsecp256k1](https://github.com/bitcoin/secp256k1) must be in place.
 
 ```
 $ git clone https://github.com/bitcoin-core/secp256k1.git && cd secp256k1
 $ ./autogen.sh
-$ ./configure --enable-module-recovery
+$ ./configure
 $ make
 $ sudo make install
 ```
 
-If you have cloned the project and in project root:
+Or if you have cloned the project, you could go to project root and run this install script:
 
 ```
 git submodule update --init --recursive
 ./install_lib.sh
 ```
+
+The recovery and ecdh modules are optional. If your local installation of secp256k1 doesn't enable them then the gem would throw `LoadModuleError` when related functions are invoked.
 
 ## Install
 

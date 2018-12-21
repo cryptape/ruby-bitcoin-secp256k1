@@ -76,6 +76,8 @@ class Secp256k1Test < Minitest::Test
   end
 
   def test_ecdsa_recover
+    return unless C.module_recovery_enabled?
+
     pk = PrivateKey.new
     unrelated = MyECDSA.new
 
