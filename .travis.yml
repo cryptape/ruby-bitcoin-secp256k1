@@ -46,8 +46,12 @@ jobs:
         - code_quality security_audit:bundler_audit
         - code_quality quality_audit fail_fast=false generate_index=true lowest_score=80 rubocop_max_offenses=200
 
+# automatically release Ruby gem to RubyGems after a successful build with `git push --tags`
+# refs: https://docs.travis-ci.com/user/deployment/rubygems/
+# 1. how to get your api_key: https://rubygems.org/profile/edit
+# 2. intall `travis` cli: $ gem install travis
+# 3. get encrypted api_key secure: $ travis setup rubygems
 deploy:
-  # automatically release Ruby gem to RubyGems after a successful build with `git push --tags`
   - provider: rubygems
     api_key:
       secure: API_KEY_SECURE
