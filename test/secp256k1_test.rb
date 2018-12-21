@@ -61,7 +61,7 @@ class Secp256k1Test < Minitest::Test
 
     had_to_normalize, normsig = pk.ecdsa_signature_normalize(raw_sig, check_only: true)
     assert_equal false, had_to_normalize
-    assert_equal nil, normsig
+    assert_nil normsig
 
     sig = "\xAA" + "\xFF"*31 + "\xAA" + "\xFF"*31
     raw_sig = pk.ecdsa_deserialize_compact sig
@@ -72,7 +72,7 @@ class Secp256k1Test < Minitest::Test
 
     normalized, normsig = pk.ecdsa_signature_normalize raw_sig, check_only: true
     assert_equal true, normalized
-    assert_equal nil, normsig
+    assert_nil normsig
   end
 
   def test_ecdsa_recover
@@ -85,7 +85,7 @@ class Secp256k1Test < Minitest::Test
     assert_equal pubser, pk.pubkey.serialize
 
     recsig_ser = unrelated.ecdsa_recoverable_serialize recsig
-    recsig2 = unrelated.ecdsa_recoverable_deserialize *recsig_ser
+    recsig2 = unrelated.ecdsa_recoverable_deserialize(*recsig_ser)
     pubkey2 = unrelated.ecdsa_recover 'hello', recsig2
     pubser2 = PublicKey.new(pubkey: pubkey2).serialize
     assert_equal pubser, pubser2
