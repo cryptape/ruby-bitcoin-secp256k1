@@ -16,5 +16,6 @@ module Secp256k1
   ALL_FLAGS = FLAG_SIGN | FLAG_VERIFY
 
   class AssertError < StandardError; end
+  class LoadModuleError < StandardError; end
 
 end

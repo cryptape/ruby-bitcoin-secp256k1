@@ -171,6 +171,8 @@ module Secp256k1
     end
 
     def ecdsa_sign_recoverable(msg, raw: false, digest: Digest::SHA256)
+      raise LoadModuleError, "libsecp256k1 recovery module is not enabled" unless C.module_recovery_enabled?
+
       msg32 = hash32 msg, raw, digest
       raw_sig = C::ECDSARecoverableSignature.new.pointer
 
