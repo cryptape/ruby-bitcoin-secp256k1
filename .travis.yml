@@ -54,7 +54,7 @@ jobs:
 deploy:
   - provider: rubygems
     api_key:
-      secure: API_KEY_SECURE
+      secure: oAeCF8k1NW3a94NXJoQs6kBRJG5TY9zdGJAVgvMxFuEnDVgjmuoKceTLdeQzKin+2PS2KRzGhT5E27wrNvCnQGfjKmQA9kPDqSQeJNnRBkbTjxKwkbi2P4g2EE1wR5PYgKq0mJ/4BMxVWZOleYT+ihwMiZDzoadAglbs5PSlC1HNnaQbnPQ3nfN1iG7o1KXdva5Bw4mcm86QPDrSoR9Fl/7ZJvteVouvC71Qt4QhkcaVV3piDUDM6JRbxa6ydsDOV6zq4nZP7UwufgK1GIpVNiLnVZtL3jCndY84a4MYz5sgBbvSEmSVbF1OdrPgllCV2wnauOtuzTqRYF5ATYyM3Hx58jYLUyd6YwXQrEoirHCyt2XaKSF1r2f9zvllVdXSCj+6/CJ70HkHrJTO3K2C9/uZEYIfNbTFZjMASWKyB52Vch5dFmlTloI/eLF2vp5jjY4iYTInPeb59UzqyBkMT4jtwconbre8eVKW/9qHTdTJDKQqmp4jKD+raeia/FbVaOTKyZ9nWxSQI3mVy49diK2j+Pd1LVw3nXY9zMz5f5W/D/zyGVf/Xt6gRNo0aj8UdMvZJm3awvruwQpJTa2tcp5m/iv74JzsFMdgit1pEbimF6xs7Ph8wVAI7eKVctZtI/zeaw+nv3mcg3+/GNGzSSj0RsjdXetrFSh6eh+qfL0=
     gem: bitcoin-secp256k1
     on:
       tags: true
