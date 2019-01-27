@@ -104,7 +104,7 @@ module Secp256k1
 
       msg32 = hash32 msg, raw, digest
 
-      !!C.secp256k1_ecdsa_verify(@ctx, raw_sig, msg32, @public_key)
+      C.secp256k1_ecdsa_verify(@ctx, raw_sig, msg32, @public_key) == 1
     end
 
     def ecdh(scalar)
