@@ -37,6 +37,13 @@ class Secp256k1Test < Minitest::Test
     end
   end
 
+  def test_ecdsa_verity
+    pk = PrivateKey.new
+    raw_sig = pk.ecdsa_sign 'test'
+    assert pk.pubkey.ecdsa_verify('test', raw_sig)
+    assert !pk.pubkey.ecdsa_verify('testtest', raw_sig)
+  end
+
   def test_ecdsa_compact
     pk = PrivateKey.new
     raw_sig = pk.ecdsa_sign 'test'
