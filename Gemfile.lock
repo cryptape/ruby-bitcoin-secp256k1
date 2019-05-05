@@ -1,13 +1,13 @@
 PATH
   remote: .
   specs:
-    bitcoin-secp256k1 (0.5.0)
+    bitcoin-secp256k1 (0.5.1)
       ffi (>= 1.9.25)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    ffi (1.9.25)
+    ffi (1.10.0)
     minitest (5.11.3)
     rake (12.3.2)
     yard (0.9.16)
