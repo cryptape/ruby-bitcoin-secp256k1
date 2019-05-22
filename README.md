@@ -4,6 +4,21 @@
 
 In order to use this gem, [libsecp256k1](https://github.com/bitcoin/secp256k1) must be in place.
 
+### macOS
+
+```bash
+brew tap nervosnetwork/tap
+brew install libsecp256k1
+```
+
+### Ubuntu 18.04 or above
+
+```bash
+sudo apt install libsecp256k1-dev
+```
+
+### Ubuntu 16.04 or below
+
 ```
 $ git clone https://github.com/bitcoin-core/secp256k1.git && cd secp256k1
 $ ./autogen.sh
