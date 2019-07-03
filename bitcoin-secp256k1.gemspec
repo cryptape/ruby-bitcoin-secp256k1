@@ -19,5 +19,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency('rake', '~> 12.3')
   s.add_development_dependency('minitest', '5.11.3')
-  s.add_development_dependency('yard', '0.9.16')
+  s.add_development_dependency('yard', '0.9.20')
 end
