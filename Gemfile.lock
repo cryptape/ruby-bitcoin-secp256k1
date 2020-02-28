@@ -9,7 +9,7 @@ GEM
   specs:
     ffi (1.11.1)
     minitest (5.11.3)
-    rake (12.3.2)
+    rake (13.0.1)
     yard (0.9.20)
 
 PLATFORMS
@@ -18,7 +18,7 @@ PLATFORMS
 DEPENDENCIES
   bitcoin-secp256k1!
   minitest (= 5.11.3)
-  rake (~> 12.3)
+  rake (~> 13.0)
   yard (= 0.9.20)
 
 BUNDLED WITH
